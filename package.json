@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/HackrLabs/generator-lean",
   "dependencies": {
+    "body-parser": "^1.6.4",
+    "express": "^4.8.4",
+    "nohm": "^0.9.5",
     "q": "^1.0.1"
   }
 }

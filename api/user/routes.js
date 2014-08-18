@@ -6,8 +6,8 @@ module.exports = {
     post: controller.newUser,
   },
   '/:id': {
-    get: controller.getById,
-    put: controller.setById,
+  //  get: controller.getById,
+    post: controller.setById,
   }
 };
 

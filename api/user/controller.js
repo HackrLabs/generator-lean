@@ -1,40 +1,49 @@
 var User = require("./model");
 var Q = require("q");
 module.exports = {
-  getAll: function() {
-    return new Q.Promise(function(resolve, reject) {
-      User.find(function(err, ids) {
-        if (err) { return reject(err); }
-        if (ids.length === 0) { return resolve([]); }
-        var users = [];
-        ids.forEach(function (id) {
-          var user = new User();
-          users.load(id, function (err, props) {
-            if (err) { return reject(err); }
-            users.push({id:id, props:props});
-            if (users.length === ids.length) {
-              resolve(users);
-            }
-          });
+  getAll: function(req, res) {
+    User.find(function(err, ids) {
+      if (err || ids.length === 0) {
+        res.json({});
+        return;
+      }
+
+      var users = [];
+      ids.forEach(function (id) {
+        var user = new User();
+        users.load(id, function (err, props) {
+          if (err) {
+            res.json({});
+            return;
+          }
+          users.push({id:id, props:props});
+          if (users.length === ids.length) {
+            resolve(users);
+          }
         });
       });
     });
   },
   newUser: function(req) {
-    return new Q.Promise(function(resolve, reject) {
-      var data = {
-        name: req.param('name'),
-        password: req.param('password'),
-        email: req.param('email')
-      };
+    var data = {
+      name: req.param('name'),
+      password: req.param('password'),
+      email: req.param('email')
+    };
 
-      var user = Nohm.factory('User'); // can this just be new User()?
-      user.store(data, function(err) {
-        if (err) { reject(err); }
-        resolve(user.allProperties());
-      });
+    var user = Nohm.factory('User'); // can this just be new User()?
+    user.store(data, function(err) {
+      if (err) { reject(err); }
+      resolve(user.allProperties());
     });
   },
+  setById: function(req, res) {
+    console.log("SetById:");
+    console.log(req.body);
+    console.log(req.params);
+
+    res.json({});
+  }
   // If each method creates a promise then returns it, why not create a promise in the framework,
   // and give the resolve/reject methods to the callback.
 
