@@ -1,7 +1,7 @@
 console.log("db")
 
 var Nohm = require('nohm').Nohm;
-var redis = require('redis');
+var redis = require('fakeredis');
 var client = redis.createClient();
 Nohm.setClient(client);
 //client.select(3);

@@ -19,9 +19,8 @@
   "dependencies": {
     "body-parser": "^1.6.4",
     "express": "^4.8.4",
+    "fakeredis": "*",
     "nohm": "^0.9.5",
-    "q": "^1.0.1",
-    "redis": "^0.12.1",
     "supertest": "^0.13.0"
   }
 }
