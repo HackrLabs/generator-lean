@@ -1,5 +1,5 @@
+var Nohm = require("../../db");
 var User = require("./model");
-var Q = require("q");
 module.exports = {
   getAll: function(req, res) {
     User.find(function(err, ids) {
@@ -24,7 +24,7 @@ module.exports = {
       });
     });
   },
-  newUser: function(req) {
+  newUser: function(req, res) {
     var data = {
       name: req.param('name'),
       password: req.param('password'),
@@ -33,8 +33,12 @@ module.exports = {
 
     var user = Nohm.factory('User'); // can this just be new User()?
     user.store(data, function(err) {
-      if (err) { reject(err); }
-      resolve(user.allProperties());
+      console.log("Done:", err);
+      if (err) {
+        res.json({err:err});
+      } else {
+        res.json({result:user.allProperties()});
+      }
     });
   },
   setById: function(req, res) {

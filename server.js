@@ -4,7 +4,6 @@ var fs = require('fs');
 var bodyParser = require('body-parser');
 var server = express();
 
-
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
 server.use(function (req, res, next) {
@@ -15,16 +14,6 @@ server.use(function (req, res, next) {
 function register(path, type, callback) {
   console.log("Register", type, path, callback.name);
   server[type](path, callback);
-/*
-    function(req, res) {
-    console.log("Body", req.body);
-    console.log("Param",req.params);
-    callback(req.params, req.body).then(function(returned) {
-      res.json({result:returned, error:null});
-    }).catch(function(error) {
-      res.json({result:null, error:error});
-    });
-  });*/
 }
 
 function loadModule(module) {
@@ -35,7 +24,7 @@ function loadModule(module) {
   for (var path in routes) {
     var full = "/" + module + path;
     for(var type in routes[path]) {
-      register(path, type, routes[path][type])
+      register(full, type, routes[path][type])
     }
   }
 }
@@ -44,8 +33,6 @@ var modules = fs.readdirSync(config.app.namespace);
 var id;
 for(id = 0; id < modules.length ; id++)
 {
-  var module = modules[id];
-  loadModule(module);
+  loadModule(modules[id]);
 }
-
-server.listen(3000);
+module.exports = server;
