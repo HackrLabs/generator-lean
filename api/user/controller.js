@@ -1,4 +1,4 @@
-var Nohm = require("../../db");
+var Nohm = require("../../libs/db");
 var User = require("./model");
 module.exports = {
   getAll: function(req, res) {

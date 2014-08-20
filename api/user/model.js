@@ -1,4 +1,4 @@
-var Nohm = require("../../db");
+var Nohm = require("../../libs/db");
 var crypto = require('crypto');
 /**
  * Given a password and salt this creates an SHA512 hash.

@@ -1,4 +1,4 @@
-var config = require('./config');
+var config = require('./libs/config');
 var express = require('express');
 var fs = require('fs');
 var bodyParser = require('body-parser');

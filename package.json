@@ -2,7 +2,7 @@
   "name": "generator-lean",
   "version": "0.0.0",
   "description": "A Lean ExpressJS API Framework Generator",
-  "main": "config.js",
+  "main": "run.js",
   "scripts": {
     "test": "clear; node test.js"
   },
