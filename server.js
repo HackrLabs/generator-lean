@@ -6,10 +6,6 @@ var server = express();
 
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
-server.use(function (req, res, next) {
-  console.log("Body", req.body); // populated!
-  next();
-});
 
 function register(path, type, callback) {
   console.log("Register", type, path, callback.name);
