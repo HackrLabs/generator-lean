@@ -33,11 +33,10 @@ module.exports = {
 
     var user = Nohm.factory('User'); // can this just be new User()?
     user.store(data, function(err) {
-      console.log("Done:", err);
       if (err) {
         res.json({err:err});
       } else {
-        res.json({result:user.allProperties()});
+        res.json(user.allProperties());
       }
     });
   },
