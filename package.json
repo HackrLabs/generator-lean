@@ -4,7 +4,7 @@
   "description": "A Lean ExpressJS API Framework Generator",
   "main": "run.js",
   "scripts": {
-    "test": "clear; node node_modules/jasmine-node/lib/jasmine-node/cli.js"
+    "test": "clear; node node_modules/jasmine-node/lib/jasmine-node/cli.js ."
   },
   "repository": {
     "type": "git",
