@@ -4,6 +4,15 @@ var fs = require('fs');
 var bodyParser = require('body-parser');
 var server = express();
 
+function cors(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+  res.header('Access-Control-Allow-Headers', 'Content-Type')
+
+  next();
+}
+
+server.use(cors);
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
 
