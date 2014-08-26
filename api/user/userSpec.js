@@ -26,4 +26,42 @@ describe("/user/", function () {
     it('should not send back a password', function () {expect(response.password).toBeUndefined(); });
     it('should have the same email', function () {expect(response.email).toBe(seed.email); });
   });
+
+  describe('#get', function() {
+    var tester = test(server);
+    var user1, user2;
+
+    it('[setup user1]', function(done) {
+      tester.post('/user/')
+        .send({
+          name:'user1',
+          password:'password1',
+          email:'email1@gmail.com'})
+        .end(function(err, res) {
+          expect(err).toBeNull();
+          user1 = res.body;
+          done();
+      });
+    });
+
+    it('[setup user2]', function(done) {
+      tester.post('/user/')
+        .send({
+          name:'user2',
+          password:'password1',
+          email:'email2@gmail.com'})
+        .end(function(err, res) {
+          expect(err).toBeNull();
+          user2 = res.body;
+          done();
+      });
+    });
+
+    it('should return all users', function() {
+      tester.get('/user/').end(function(err, res) {
+        expect(res.body).toContain(user1);
+        expect(res.body).toContain(user2);
+      });
+    });
+  });
 });
