@@ -11,14 +11,14 @@ module.exports = {
       var users = [];
       ids.forEach(function (id) {
         var user = new User();
-        users.load(id, function (err, props) {
+        User.load(id, function (err, props) {
           if (err) {
-            res.json({});
+            res.json([]);
             return;
           }
           users.push({id:id, props:props});
           if (users.length === ids.length) {
-            resolve(users);
+            res.json(users);
           }
         });
       });
